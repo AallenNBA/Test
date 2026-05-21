@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Venue Tracker - State Farm Arena</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">🏀</span>
+                    <div class="logo-text">
+                        <div class="logo-title">NBA VENUE TRACKER</div>
+                        <div class="logo-subtitle">BROADCAST OPERATIONS & ENGINEERING</div>
+                    </div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <button class="nav-btn active" data-tab="camera-map">CAMERA MAP</button>
+                <button class="nav-btn" data-tab="notes">NOTES</button>
+                <button class="nav-btn" data-tab="metrics">METRIC CONVERSION</button>
+            </nav>
+            <div class="header-right">
+                <div class="auto-save">
+                    <span class="auto-save-dot">●</span>
+                    <span>AUTO SAVE</span>
+                </div>
+                <button class="header-icon">☁️</button>
+                <button class="header-icon">⚙️</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Sidebar -->
+            <aside class="sidebar sidebar-left">
+                <section class="sidebar-section">
+                    <h3 class="section-title">QUICK ADD</h3>
+                    <button class="quick-add-btn" id="addVenue">
+                        <span class="btn-icon">📍</span>
+                        <span>Add New Venue</span>
+                    </button>
+                    <button class="quick-add-btn" id="addCamera">
+                        <span class="btn-icon">📷</span>
+                        <span>Add New Camera</span>
+                    </button>
+                    <button class="quick-add-btn" id="addAnnounce">
+                        <span class="btn-icon">🎙️</span>
+                        <span>Add Announce Table</span>
+                    </button>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3 class="section-title">VENUE SEARCH</h3>
+                    <div class="search-box">
+                        <input type="text" id="venueSearch" placeholder="Search venues...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3 class="section-title">VENUES (1)</h3>
+                    <div class="venue-list">
+                        <div class="venue-item active" data-venue="state-farm-arena">
+                            <div class="venue-header">
+                                <span class="venue-icon">🏟️</span>
+                                <div class="venue-info">
+                                    <div class="venue-name">State Farm Arena</div>
+                                    <div class="venue-location">Atlanta, GA</div>
+                                </div>
+                                <span class="venue-star">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3 class="section-title">INSTRUCTIONS</h3>
+                    <ul class="instructions-list">
+                        <li>Drag icons to position cameras on the map</li>
+                        <li>Click an icon to select and edit properties</li>
+                        <li>Drag to move • Click to expand</li>
+                        <li>All changes auto save</li>
+                        <li>Use right panel to configure selected position</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- Center Content -->
+            <main class="main-area">
+                <!-- Venue Selector -->
+                <div class="venue-selector">
+                    <select id="venueSelect" class="venue-dropdown">
+                        <option value="state-farm-arena">State Farm Arena</option>
+                    </select>
+                    <button class="control-btn">↶</button>
+                    <button class="control-btn">↷</button>
+                    <button class="zoom-btn">−</button>
+                    <span class="zoom-level">100%</span>
+                    <button class="zoom-btn">+</button>
+                    <button class="control-btn">⛶</button>
+                    <button class="legend-btn">LEGEND</button>
+                </div>
+
+                <!-- Arena Map Container -->
+                <div class="map-container" id="mapContainer">
+                    <div class="arena-info">
+                        <h2 id="arenaTitle">Atlanta Hawks Seating Chart With Rows</h2>
+                        <p id="arenaSubtitle">at State Farm Arena</p>
+                    </div>
+                    <svg id="arenaSvg" class="arena-svg" viewBox="0 0 800 600"></svg>
+                    <div class="cameras-layer" id="camerasLayer"></div>
+                </div>
+
+                <!-- Bottom Controls -->
+                <div class="bottom-controls">
+                    <div class="camera-icons">
+                        <div class="camera-icon-group">
+                            <button class="camera-icon-btn selected" data-type="broadcast-camera">
+                                <span>📷</span>
+                                <span class="label">Broadcast Camera</span>
+                            </button>
+                            <button class="camera-icon-btn" data-type="handheld-camera">
+                                <span>🎥</span>
+                                <span class="label">Handheld Camera</span>
+                            </button>
+                            <button class="camera-icon-btn" data-type="headset">
+                                <span>🎧</span>
+                                <span class="label">Headset</span>
+                            </button>
+                            <button class="camera-icon-btn" data-type="announce-table">
+                                <span>📢</span>
+                                <span class="label">Announce Table</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="map-controls">
+                        <label class="control-label">
+                            <input type="checkbox" id="gridToggle" checked>
+                            <span>Grid</span>
+                        </label>
+                        <label class="control-label">
+                            <input type="checkbox" id="labelsToggle" checked>
+                            <span>Labels</span>
+                        </label>
+                    </div>
+
+                    <div class="selected-count">
+                        <span id="selectedCount">1 Camera</span>
+                        <button class="remove-all-btn">Remove All Cameras</button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar sidebar-right">
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3 class="section-title">SELECTED POSITION</h3>
+                        <button class="menu-btn">⋯</button>
+                    </div>
+                    <div class="position-preview">
+                        <div class="preview-icon">📷</div>
+                        <div class="preview-text">
+                            <div class="preview-title" id="selectedTitle">Mid-Level Center Court</div>
+                            <div class="preview-subtitle" id="selectedSubtitle">Play-by-Play</div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-tab="settings">SETTINGS</button>
+                    <button class="settings-tab" data-tab="measurements">MEASUREMENTS</button>
+                </div>
+
+                <section class="sidebar-section settings-panel" id="settingsPanel">
+                    <h4 class="subsection-title">ICON STYLE</h4>
+                    <div class="setting-group">
+                        <label>Icon Type</label>
+                        <select id="iconType" class="setting-select">
+                            <option value="broadcast-camera">📷 Broadcast Camera</option>
+                            <option value="handheld-camera">🎥 Handheld Camera</option>
+                            <option value="headset">🎧 Headset</option>
+                            <option value="announce-table">📢 Announce Table</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Background Color</label>
+                        <input type="color" id="bgColor" class="color-picker" value="#e63946">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Icon Color</label>
+                        <input type="color" id="iconColor" class="color-picker" value="#ffffff">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Size</label>
+                        <div class="slider-group">
+                            <input type="range" id="sizeSlider" min="20" max="80" value="44" class="slider">
+                            <span class="slider-value" id="sizeValue">44 px</span>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Rotation</label>
+                        <div class="slider-group">
+                            <input type="range" id="rotationSlider" min="0" max="360" value="0" class="slider">
+                            <span class="slider-value" id="rotationValue">0°</span>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Flip</label>
+                        <div class="flip-buttons">
+                            <button class="flip-btn">⟷</button>
+                            <button class="flip-btn">⟨⟩</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Label Font Size</label>
+                        <div class="slider-group">
+                            <input type="range" id="labelSizeSlider" min="8" max="24" value="14" class="slider">
+                            <span class="slider-value" id="labelSizeValue">14 px</span>
+                        </div>
+                    </div>
+
+                    <h4 class="subsection-title">LABEL SETTINGS</h4>
+                    <div class="setting-group">
+                        <label>Title</label>
+                        <input type="text" id="labelTitle" class="setting-input" placeholder="Position title">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Camera Count</label>
+                        <div class="counter">
+                            <button class="counter-btn">−</button>
+                            <input type="text" id="cameraCount" class="counter-input" value="1" readonly>
+                            <button class="counter-btn">+</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="hideWhenExpanded">
+                            <span>Hide Icon When Expanded</span>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Highlight Color</label>
+                        <input type="color" id="highlightColor" class="color-picker" value="#e63946">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Opacity</label>
+                        <div class="slider-group">
+                            <input type="range" id="opacitySlider" min="0" max="100" value="80" class="slider">
+                            <span class="slider-value" id="opacityValue">80%</span>
+                        </div>
+                    </div>
+
+                    <h4 class="subsection-title">NOTES</h4>
+                    <textarea id="positionNotes" class="notes-textarea" placeholder="Add notes about this position..."></textarea>
+                    <button class="save-note-btn">SAVE NOTE</button>
+                </section>
+
+                <section class="sidebar-section" id="measurementsPanel" style="display: none;">
+                    <h4 class="subsection-title">MEASUREMENTS</h4>
+                    <div class="measurement-item">
+                        <label>Position X</label>
+                        <input type="number" id="posX" class="setting-input" placeholder="0">
+                    </div>
+                    <div class="measurement-item">
+                        <label>Position Y</label>
+                        <input type="number" id="posY" class="setting-input" placeholder="0">
+                    </div>
+                    <div class="measurement-item">
+                        <label>Distance from Court (ft)</label>
+                        <input type="number" id="distance" class="setting-input" placeholder="0" step="0.1">
+                    </div>
+                    <div class="measurement-item">
+                        <label>Angle (°)</label>
+                        <input type="number" id="angle" class="setting-input" placeholder="0" step="0.1">
+                    </div>
+                </section>
+
+                <section class="sidebar-section action-buttons">
+                    <button class="action-btn delete-btn">DELETE POSITION</button>
+                    <button class="action-btn duplicate-btn">DUPLICATE</button>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
