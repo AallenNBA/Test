@@ -1,0 +1,111 @@
+{
+  "venues": [
+    {
+      "id": "state-farm-arena",
+      "name": "State Farm Arena",
+      "location": "Atlanta, GA",
+      "coordinates": {
+        "latitude": 33.7490,
+        "longitude": -84.3880
+      },
+      "team": {
+        "name": "Atlanta Hawks",
+        "league": "NBA",
+        "mascot": "The Hawk"
+      },
+      "details": {
+        "yearOpened": 2018,
+        "capacity": 18676,
+        "architect": "Heery International",
+        "previousName": "None",
+        "address": "1 State Farm Dr, Atlanta, GA 30303"
+      },
+      "dimensions": {
+        "arenaLength": 131,
+        "arenaWidth": 131,
+        "courtLength": 94,
+        "courtWidth": 50,
+        "units": "feet"
+      },
+      "seatingChart": {
+        "totalSections": 22,
+        "lowerBowl": 12,
+        "upperBowl": 10
+      },
+      "facilities": [
+        "Premium Club Seating",
+        "Suite Seating",
+        "Accessible Seating",
+        "Mobility Device Parking",
+        "Family Restrooms"
+      ],
+      "amenities": [
+        "Multiple Food & Beverage Outlets",
+        "Premium Concessions",
+        "Team Store",
+        "Guest Services",
+        "First Aid Station"
+      ],
+      "broadcastFacilities": {
+        "cameras": [],
+        "announceTables": [],
+        "broadcastPosition": "Mid-Level Center Court",
+        "productionControl": "Lower Level Media Room"
+      },
+      "parkingInfo": {
+        "totalSpaces": 2500,
+        "handicapSpaces": 75,
+        "valet": true
+      },
+      "accessibilityFeatures": [
+        "ADA Compliant Entrances",
+        "Elevators & Escalators",
+        "Accessible Restrooms",
+        "Audio Description",
+        "Visual Alerts"
+      ],
+      "notes": "State-of-the-art facility in downtown Atlanta. Modern amenities and excellent sightlines for broadcasts.",
+      "lastUpdated": "2026-05-21"
+    }
+  ],
+  "cameraTypes": [
+    {
+      "id": "broadcast-camera",
+      "name": "Broadcast Camera",
+      "description": "Primary broadcast camera position",
+      "icon": "📷",
+      "typical_height": "Upper level sideline",
+      "typical_angle": "Center court"
+    },
+    {
+      "id": "handheld-camera",
+      "name": "Handheld Camera",
+      "description": "Mobile camera for sideline coverage",
+      "icon": "🎥",
+      "typical_height": "Court level",
+      "typical_angle": "Dynamic"
+    },
+    {
+      "id": "headset",
+      "name": "Headset",
+      "description": "Audio position for announcers",
+      "icon": "🎧",
+      "typical_height": "Announce booth",
+      "typical_angle": "N/A"
+    },
+    {
+      "id": "announce-table",
+      "name": "Announce Table",
+      "description": "Broadcast announce position",
+      "icon": "📢",
+      "typical_height": "Court level or elevated",
+      "typical_angle": "Center court view"
+    }
+  ],
+  "broadcastStandards": {
+    "resolution": "4K/8K Ready",
+    "frameRate": "60fps",
+    "colorSpace": "Rec. 2020",
+    "audioChannels": "5.1 Surround"
+  }
+}
